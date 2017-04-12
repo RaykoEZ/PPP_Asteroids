@@ -1,0 +1,4 @@
+#ifndef CHARACONTROLS_H
+#define CHARACONTROLS_H
+
+#endif // CHARACONTROLS_H
