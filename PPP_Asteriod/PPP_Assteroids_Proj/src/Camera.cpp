@@ -29,7 +29,15 @@ void Camera::lookAt(Vec4 _eye, Vec4 _look, Vec4 _up)
   mv.m_32= _eye.dot(n);
   mv.loadModelView();
 }
+void Camera::orthographic(float _width, float _height)
+{
 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0,_width,0,_height,-1,1);
+
+
+}
 void Camera::perspective(float _fovy,float _aspect, float _zNear, float _zFar)
 {
   float range = tan(radians(_fovy / 2.0)) * _zNear;

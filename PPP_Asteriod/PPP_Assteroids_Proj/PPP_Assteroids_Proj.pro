@@ -16,7 +16,8 @@ HEADERS += \
     include/Camera.h \
     include/DrawThings.h \
     include/Ship.h \
-    include/Asteroids.h
+    include/Asteroids.h \
+    include/Projectile.h
 
 
 SOURCES=$$PWD/src/main.cpp \
@@ -27,7 +28,8 @@ SOURCES=$$PWD/src/main.cpp \
     src/GameObjects.cpp \
     src/DrawThings.cpp \
     src/Ship.cpp \
-    src/Asteroids.cpp
+    src/Asteroids.cpp \
+    src/Projectile.cpp
 
 
 CONFIG-=app_bundle

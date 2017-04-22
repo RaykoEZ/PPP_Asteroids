@@ -25,6 +25,7 @@ class Camera
 {
   public :
     static void lookAt(Vec4 _eye, Vec4 _look, Vec4 _up);
+    static void orthographic(float _width, float _height);
     static void perspective(float _fovy,float _aspect, float _zNear, float _zFar);
     static float radians(float _deg );
 
