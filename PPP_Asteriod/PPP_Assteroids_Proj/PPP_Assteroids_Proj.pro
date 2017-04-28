@@ -1,6 +1,6 @@
 # we are going to build an app
 TEMPLATE=app
-CONFIG+=c++11
+CONFIG+=c++14
 # qt 5 wants this may cause errors with 4
 isEqual(QT_MAJOR_VERSION, 5) {cache() }
 QT += opengl
@@ -14,10 +14,10 @@ HEADERS += \
     include/Mat4.h \
     include/Vec4.h \
     include/Camera.h \
-    include/DrawThings.h \
     include/Ship.h \
     include/Asteroids.h \
-    include/Projectile.h
+    include/Projectile.h \
+    include/CalcFunctions.h
 
 
 SOURCES=$$PWD/src/main.cpp \
@@ -26,10 +26,10 @@ SOURCES=$$PWD/src/main.cpp \
     src/Vec4.cpp \
     src/Camera.cpp \
     src/GameObjects.cpp \
-    src/DrawThings.cpp \
     src/Ship.cpp \
     src/Asteroids.cpp \
-    src/Projectile.cpp
+    src/Projectile.cpp \
+    src/CalcFunctions.cpp
 
 
 CONFIG-=app_bundle
