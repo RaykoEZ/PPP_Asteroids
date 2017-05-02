@@ -23,16 +23,18 @@
 #include "CollisionFunctions.h"
 #include <vector>
 #include <chrono>
+
 #undef main
 
 // function to init the basic OpenGL scene for this demo
 void initOpenGL();
-// function to render our scene.
+// function to manage collisions on the scene
 void collisionManage(int &_level,Ship &_player,std::vector<std::unique_ptr<Asteroids>> &_Asteroids, std::vector<std::unique_ptr<Projectile>> &_Bullets);
 
 
 int main(int argc, char *argv[])
 {
+
 
     int winXLeng=720;
     int winYLeng=576;
@@ -46,6 +48,8 @@ int main(int argc, char *argv[])
     win.makeCurrent();
     // setup our default OpenGL window state
     initOpenGL();
+
+    //initIrrKlang();
     Ship player;
     int spawnLimit=3;
     //float xMouse=0.00f;
@@ -74,7 +78,9 @@ int main(int argc, char *argv[])
           switch( event.key.keysym.sym )
           {
             // if it's the escape key quit
-            case SDLK_ESCAPE :  quit = true; break;
+            case SDLK_ESCAPE :
+              quit = true;
+              break;
             // make OpenGL draw wireframe
             case SDLK_e : glPolygonMode(GL_FRONT_AND_BACK,GL_LINE); break;
             // make OpenGL draw solid
@@ -105,8 +111,8 @@ int main(int argc, char *argv[])
          //std::cout<<'\n'<<"duration: "<<sec.count()<<'\n';
          if(sec.count()>225.0f)
          {
-             bulletList.push_back(std::make_unique<Projectile>
-                                 (Projectile(player.m_direction,player.m_position)));
+             bulletList.push_back(std::unique_ptr<Projectile>
+                                 ( new Projectile(player.m_direction,player.m_position)));
              history=current;
              //std::cout<<'\n'<<" Shots Fyerd! "<<'\n';
          }
@@ -133,9 +139,9 @@ int main(int argc, char *argv[])
      {
          //std::cout<<"SpawnLimit: "<<spawnLimit<<'\n';
          //std::cout<<"Leve: "<<player.m_level<<'\n';
-         asteroidList.push_back(std::make_unique<Asteroids>
-                                (Asteroids(Vec4(-1.0f,-1.0f,0.0f,1.0f),
-                                           Vec4(0.5f,0.5f,0.0f,1.0f),
+         asteroidList.push_back(std::unique_ptr<Asteroids>
+                                (new Asteroids(Vec4(-1.0f,-1.0f,0.0f,1.0f),
+                                           Vec4(0.8f,0.8f,0.0f,1.0f),
                                            Vec4(-15.5f,-15.5f,0.0f,1.0f),
                                            Vec4(-15.0f,-15.0f,0.0f,1.0f),
                                            0.1f,0.35f,
@@ -178,6 +184,7 @@ int main(int argc, char *argv[])
      }
      win.swapWindow();
     }
+
     return EXIT_SUCCESS;
 }
 
@@ -198,6 +205,7 @@ void initOpenGL()
   glEnable(GL_NORMALIZE);
 
 }
+
 
 
 void collisionManage(int &_spawnLimit,Ship &_player, std::vector<std::unique_ptr<Asteroids> > &_asteroids, std::vector<std::unique_ptr<Projectile> > &_bullets)
@@ -230,9 +238,9 @@ void collisionManage(int &_spawnLimit,Ship &_player, std::vector<std::unique_ptr
                         _asteroids.erase(_asteroids.begin()+j);
                         return;
                     }
-                    _asteroids.push_back(std::make_unique<Asteroids>(Asteroids(*_asteroids[j].get())));
+                    _asteroids.push_back(std::unique_ptr<Asteroids>(new Asteroids(*_asteroids[j].get())));
                     //std::cout<<"AsteroidList Size after split: "<<_asteroids.size()<<'\n';
-                    _asteroids.push_back(std::make_unique<Asteroids>(Asteroids(*_asteroids[_asteroids.size()-1].get())));
+                    _asteroids.push_back(std::unique_ptr<Asteroids>(new Asteroids(*_asteroids[_asteroids.size()-1].get())));
                     _asteroids.erase(_asteroids.begin()+j);
                     _player.gainScore(_spawnLimit,_asteroids[j]->getVelo());
 

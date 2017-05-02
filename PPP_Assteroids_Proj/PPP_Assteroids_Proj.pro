@@ -1,6 +1,6 @@
 # we are going to build an app
 TEMPLATE=app
-CONFIG+=c++14
+CONFIG+=c++11
 # qt 5 wants this may cause errors with 4
 isEqual(QT_MAJOR_VERSION, 5) {cache() }
 QT += opengl
@@ -58,8 +58,7 @@ LIBS +="-LC:\SDL2\lib\x64" -lSDL2
 LIBS+=-lopengl32
 CONFIG+=console
 
+
 }
-
-
 
 

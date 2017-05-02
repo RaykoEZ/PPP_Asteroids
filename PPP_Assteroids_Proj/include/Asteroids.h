@@ -23,7 +23,7 @@ public:
                           rng(_rotSpdMin,_rotSpdMax),_size,asteroidType){;}
 
     Asteroids(const Asteroids &_obj):
-              GameObjects(randomVector(Vec4(-1.0f,-1.0f,0.0f,1.0f),Vec4(0.5f,0.f,0.0f,1.0f)),
+              GameObjects(randomVector(Vec4(-1.0f,-1.0f,0.0f,1.0f),Vec4(0.8f,0.8f,0.0f,1.0f)),
                                        _obj.m_position,
                                        rng(_obj.getVelo(),_obj.getVelo()+0.1f),0.0f,
                                        rng(2.0f,6.0f),

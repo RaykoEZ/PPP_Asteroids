@@ -195,9 +195,9 @@ compiler_clean:
 obj\main.obj: src\main.cpp include/GameObjects.h \
 		include/Vec4.h \
 		include/Ship.h \
+		include/CalcFunctions.h \
 		include/Projectile.h \
 		include/Asteroids.h \
-		include/CalcFunctions.h \
 		include/Camera.h \
 		include/SDLOpenGL.h \
 		c:\SDL2\include\SDL.h \
@@ -303,7 +303,8 @@ obj\GameObjects.obj: src\GameObjects.cpp include/GameObjects.h \
 
 obj\Ship.obj: src\Ship.cpp include/Ship.h \
 		include/GameObjects.h \
-		include/Vec4.h
+		include/Vec4.h \
+		include/CalcFunctions.h
 
 obj\Asteroids.obj: src\Asteroids.cpp include/Asteroids.h \
 		include/GameObjects.h \
@@ -321,8 +322,8 @@ obj\CollisionFunctions.obj: src\CollisionFunctions.cpp include/CollisionFunction
 		include/Vec4.h \
 		include/GameObjects.h \
 		include/Ship.h \
-		include/Asteroids.h \
 		include/CalcFunctions.h \
+		include/Asteroids.h \
 		include/Projectile.h
 
 ####### Install
