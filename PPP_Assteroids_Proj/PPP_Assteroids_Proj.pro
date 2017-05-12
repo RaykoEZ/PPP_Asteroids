@@ -18,7 +18,12 @@ HEADERS += \
     include/Asteroids.h \
     include/Projectile.h \
     include/CalcFunctions.h \
-    include/CollisionFunctions.h
+    include/CollisionFunctions.h \
+    include/Audio.h \
+    include/Music.h \
+    include/SoundFX.h \
+    include/SoundTriggers.h
+
 
 
 SOURCES=$$PWD/src/main.cpp \
@@ -28,10 +33,12 @@ SOURCES=$$PWD/src/main.cpp \
     src/Camera.cpp \
     src/GameObjects.cpp \
     src/Ship.cpp \
-    src/Asteroids.cpp \
     src/Projectile.cpp \
     src/CalcFunctions.cpp \
-    src/CollisionFunctions.cpp
+    src/CollisionFunctions.cpp \
+    src/Music.cpp \
+    src/SoundFX.cpp \
+    src/SoundTriggers.cpp
 
 
 CONFIG-=app_bundle
@@ -48,17 +55,41 @@ LIBS+=$$system(sdl2-config --libs)
 }
 
 !win32:LIBS+=-L/usr/local/lib
-macx:LIBS+=-framework OpenGL
+macx: {
+  DEFINES+=MAC_OS_X_VERSION_MIN_REQUIRED=1060
+  QMAKE_LFLAGS += -F/Library/Frameworks
+# LIBS += -framework SDL2
+  INCLUDEPATH += /Library/Frameworks/SDL2.framework/Headers
+# INCLUDEPATH += /usr/local/include
+# QMAKE_CXXFLAGS += $$system(sdl2-config --cflags)
+# LIBS+=$$system(sdl2-config --libs)
+  LIBS+=-framework OpenGL
+  LIBS+=-framework SDL2
+  #LIBS+=-framework SDL2_mixer
+  INCLUDEPATH+= /usr/local/include/SDL2
+  #INCLUDEPATH+= $$PWD/libs/SDL2_mixer_OSX/SDL2_mixer.framework/Versions/A/Headers
 
+#  QMAKE_LFLAGS += -F$$PWD/libs/SDL2_mixer_OSX
+
+}
+
+linux-g++
+{
+LIBS+=-lSDL2_mixer
+message("linux g++")
+}
 
 win32 : {
+message("windows msvc")
 DEFINES+=_USE_MATH_DEFINES
 INCLUDEPATH +=c:/SDL2/include
 LIBS +="-LC:\SDL2\lib\x64" -lSDL2
 LIBS+=-lopengl32
 CONFIG+=console
 
-
+INCLUDEPATH +=$$PWD/libs/SDL2_mixer-2.0.1_win/include
+LIBS +="-L$$PWD\libs\SDL2_mixer-2.0.1_win\lib\x64" -lSDL2_mixer
+#LIBS +="-LC:\Users\Public\qt_prjs\PPP_Asteriod\PPP_Assteroids_Proj\libs\SDL2_mixer-2.0.1_win\lib\x64" -lSDL2_mixer
 }
 
 

@@ -1,35 +1,39 @@
-#include "Projectile.h"
 #include <iostream>
+#include "Projectile.h"
 
-float Projectile::getRange()const
-{
-    return m_range;
-}
+///\file Projectile.cpp
 
-void Projectile::setRange(float _range)
+void Projectile::setRange(const float _range)
 {
     m_range=_range;
 }
 
+//-----------------------------------------------
 
 void Projectile::shoot()
 {
-    //std::cout<<"Shooting"<<'\n';
+    //moving bullet
     move(m_velocity);
     forward(bulletType);
+    //check whether this object is out of travel range
     rangeDecay();
 }
+
+//-----------------------------------------------
 
 void Projectile::rangeDecay()
 {
 
+    //decrement range
     m_range-=m_velocity;
-
 
 }
 
+//----------------------------------------------
+
 bool Projectile::checkDecay()
 {
+    //check whether range has ran out
     if(m_range<=0.0f)
     {
         return true;

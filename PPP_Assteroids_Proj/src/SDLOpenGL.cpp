@@ -1,5 +1,7 @@
-#include "SDLOpenGL.h"
 #include <iostream>
+#include "SDLOpenGL.h"
+
+///\file SDLOpenGL.cpp
 
 SDLOpenGL::SDLOpenGL(const std::string &_name, int _x, int _y,int _width, int _height)
 {
@@ -10,6 +12,8 @@ SDLOpenGL::SDLOpenGL(const std::string &_name, int _x, int _y,int _width, int _h
   m_height=_height;
   init();
 }
+
+//----------------------------------------------------------------------------------------
 
 void SDLOpenGL::init()
 {
@@ -30,6 +34,8 @@ void SDLOpenGL::init()
 
 }
 
+//-----------------------------------------------------------------------------------------
+
 void SDLOpenGL::createGLContext()
 {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
@@ -45,7 +51,7 @@ void SDLOpenGL::createGLContext()
   m_glContext=SDL_GL_CreateContext(m_window);
 }
 
-
+//------------------------------------------------------------------------------------------
 
 void SDLOpenGL::pollEvent(SDL_Event &_event)
 {
@@ -54,7 +60,7 @@ void SDLOpenGL::pollEvent(SDL_Event &_event)
 }
 
 
-
+//------------------------------------------------------------------------------------------
 
 
 void SDLOpenGL::ErrorExit(const std::string &_msg) const

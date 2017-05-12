@@ -12,6 +12,8 @@
   #include <OpenGL/gl.h>
 #endif
 
+///\file Mat4.cpp
+
 Mat4::Mat4(float _s)
 {
     memset(&m_m,0,sizeof(m_m));
@@ -20,12 +22,18 @@ Mat4::Mat4(float _s)
     m_22=_s;
     m_33=1.0f;
 }
+
+//------------------------------------------------
+
 void Mat4::loadModelView() const
 {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMultMatrixf(&m_openGL[0]);
 }
+
+//------------------------------------------------
+
 void Mat4::loadProjection() const
 {
     glMatrixMode(GL_PROJECTION);
@@ -33,6 +41,9 @@ void Mat4::loadProjection() const
     glMultMatrixf(&m_openGL[0]);
     glMatrixMode(GL_MODELVIEW);
 }
+
+//------------------------------------------------
+
 void Mat4::identity()
 {
     memset(&m_m,0,sizeof(m_m));

@@ -1,7 +1,9 @@
 #ifndef MAT4_H_
 #define  MAT4_H_
-
 #include<array>
+
+///\file Mat4.h
+
 //mat4 16 floats
 // [1] [0] [0] [0]
 // [0] [1] [0] [0]
@@ -12,8 +14,14 @@ class Mat4
 {
 public:
     Mat4(float _s=1.0f);
+
+    ///\brief Loads modelview matrix for OpenGL
     void loadModelView() const;
+
+    ///\brief Loads projection matrix for OpenGL
     void loadProjection() const;
+
+    ///\brief Transforms current matrix to indentity
     void identity();
     union
     {
@@ -21,6 +29,8 @@ public:
         std::array<float,4> m_openGL; //array access
         struct
         {
+            ///\brief all elements of a 4x4 matrix
+
             float m_00; //> m_[0][0] m_openGL[0]
             float m_01; //> m_[0][1] m_openGL[1]
             float m_02; //> m_[0][2] m_openGL[2]

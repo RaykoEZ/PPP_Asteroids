@@ -1,5 +1,3 @@
-#include "Vec4.h"
-
 #ifdef WIN32
   #include <Windows.h> // must be before gl.h include
 #endif
@@ -12,7 +10,9 @@
 #endif
 
 #include <cmath>
+#include "Vec4.h"
 
+///\file Vec4.cpp
 
 Vec4 Vec4::cross(const Vec4 &_r) const
 {
@@ -22,6 +22,9 @@ Vec4 Vec4::cross(const Vec4 &_r) const
             m_w);
 
 }
+
+//----------------------------------------------------
+
 void Vec4::normalize()
 {
     float length = sqrt(m_x*m_x+m_y*m_y+m_z*m_z);
@@ -33,33 +36,51 @@ void Vec4::normalize()
     }
 
 }
+
+//----------------------------------------------------
+
 float Vec4::dot(const Vec4 &_r) const
 {
     float temp = (m_x*_r.m_x)+(m_y*_r.m_y)+(m_z*_r.m_z);
     return temp;
 
 }
+
+//----------------------------------------------------
+
 void Vec4::colourGL() const
 {
     //rgba
     glColor4f(m_x,m_y,m_z,m_w);
 
 }
+
+//----------------------------------------------------
+
 float Vec4::length() const
 {
     return sqrt(m_x*m_x+m_y*m_y+m_z*m_z);
 
 }
+
+//----------------------------------------------------
+
 float Vec4::lengthSquared() const
 {
     return m_x*m_x+m_y*m_y+m_z*m_z;
 
 }
+
+//----------------------------------------------------
+
 void Vec4::normalGL() const
 {
     glNormal3fv(&m_openGL[0]);
 
 }
+
+//----------------------------------------------------
+
 void Vec4::set(float _x, float _y, float _z, float _w)
 {
     m_x=_x;
@@ -68,11 +89,16 @@ void Vec4::set(float _x, float _y, float _z, float _w)
     m_w=_w;
 
 }
+
+//----------------------------------------------------
+
 void Vec4::vertexGL() const
 {
     glVertex3f(m_x,m_y,m_z);
 
 }
+
+//----------------------------------------------------
 
 Vec4 Vec4::operator -(const Vec4 &_rhs)const
 {
@@ -81,7 +107,9 @@ Vec4 Vec4::operator -(const Vec4 &_rhs)const
                 m_z-_rhs.m_z,
                 m_w);
 }
-//v1*2.0f
+
+//----------------------------------------------------
+
 Vec4 Vec4::operator *(float _rhs)const
 {
     return Vec4(m_x*_rhs,
